@@ -1,0 +1,71 @@
+package com.hospitalajea14019.projecthospitalspring.controller.base;
+
+
+import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
+import com.hospitalajea14019.projecthospitalspring.converter.base.BaseConverter;
+import com.hospitalajea14019.projecthospitalspring.model.base.Base;
+import com.hospitalajea14019.projecthospitalspring.service.base.BaseServiceImpl;
+import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+public abstract class BaseControllerImpl<E extends Base,S extends BaseServiceImpl<E,Integer>,D,C extends AbstractConverter<E,D>> implements  BaseController<E,Integer,D>{
+
+
+
+    private S servicio;
+    private C converter;
+
+
+    public BaseControllerImpl(S servicio, C converter) {
+        this.servicio = servicio;
+        this.converter = converter;
+    }
+
+
+
+    @GetMapping("")
+    @Override
+    public ResponseEntity<WrapperResponse<List<D>>> findAll() {
+        List<E> entitys = servicio.findAll();
+        List<D> dtos = converter.fromEntity(entitys);
+        return new WrapperResponse<>(true, "Succes", dtos).createResponse(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    @Override
+    public ResponseEntity<WrapperResponse<D>> findById(@PathVariable Integer id){
+        E entity = servicio.findById(id);
+        D dto = converter.fromEntity(entity);
+        return new WrapperResponse<>(true,"Succes",dto).createResponse(HttpStatus.OK);
+    }
+
+    @PostMapping("")
+    @Override
+    public ResponseEntity<WrapperResponse<D>> save(@RequestBody D dto) {
+        E entity=servicio.save(converter.fromDto(dto));
+        D dtoS= converter.fromEntity(entity);
+
+        return new WrapperResponse<>(true,"Create Succes",dtoS).createResponse(HttpStatus.CREATED);
+    }
+
+    @PutMapping("")
+    @Override
+    public ResponseEntity<WrapperResponse<D>> update(@RequestBody D dto) {
+        E entity=servicio.update(converter.fromDto(dto));
+        D dtoS= converter.fromEntity(entity);
+
+        return new WrapperResponse<>(true,"Update Succes",dtoS).createResponse(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    @Override
+    public ResponseEntity<WrapperResponse<Boolean>> delete(@PathVariable Integer id) {
+        Boolean deletS= servicio.delete(id);
+        return new WrapperResponse<>(true,"Delete Succes",deletS).createResponse(HttpStatus.OK);
+    }
+}

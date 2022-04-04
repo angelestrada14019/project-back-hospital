@@ -1,0 +1,38 @@
+package com.hospitalajea14019.projecthospitalspring.service;
+
+import com.hospitalajea14019.projecthospitalspring.exceptions.GeneralServicesExceptions;
+import com.hospitalajea14019.projecthospitalspring.exceptions.NoDataFoundExceptions;
+import com.hospitalajea14019.projecthospitalspring.exceptions.ValidateServiceExceptions;
+import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
+
+import com.hospitalajea14019.projecthospitalspring.repository.base.BaseRepository;
+import com.hospitalajea14019.projecthospitalspring.repository.OdontologoRepository;
+import com.hospitalajea14019.projecthospitalspring.service.base.BaseServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+@Slf4j
+public class OdontologoServiceImpl extends BaseServiceImpl<Odontologo,Integer> implements OdontologoService{
+
+    @Autowired
+    private OdontologoRepository odontologoRepository;
+
+    public OdontologoServiceImpl(BaseRepository<Odontologo,Integer> baseRepository) {
+        super(baseRepository);
+    }
+
+
+    @Override
+    public Odontologo findByMatricula(String matricula) {
+
+            Odontologo odontologo= Optional.ofNullable(odontologoRepository.findByMatricula(matricula))
+                    .orElseThrow(()->new NoDataFoundExceptions("No se encuentra la matricula: "+ matricula));
+            return odontologo;
+
+
+    }
+}
