@@ -2,11 +2,9 @@ package com.hospitalajea14019.projecthospitalspring.controller.base;
 
 
 import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
-import com.hospitalajea14019.projecthospitalspring.converter.base.BaseConverter;
 import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import com.hospitalajea14019.projecthospitalspring.service.base.BaseServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

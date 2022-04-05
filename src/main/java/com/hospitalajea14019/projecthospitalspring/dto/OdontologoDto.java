@@ -1,7 +1,6 @@
 package com.hospitalajea14019.projecthospitalspring.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hospitalajea14019.projecthospitalspring.dto.base.BaseDto;
 import com.hospitalajea14019.projecthospitalspring.model.Turno;
 import lombok.*;
 

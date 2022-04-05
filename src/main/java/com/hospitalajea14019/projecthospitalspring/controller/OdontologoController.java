@@ -26,7 +26,18 @@ public class OdontologoController extends BaseControllerImpl<Odontologo,Odontolo
     @Autowired
     private OdontologoService odontologoService;
 
+    @Autowired
+    private OdontologoConverter odontologoConverter;
+
     public OdontologoController(OdontologoServiceImpl servicio, OdontologoConverter converter) {
         super(servicio, converter);
     }
+
+    @GetMapping("/matricula/{matricula}")
+    public ResponseEntity<WrapperResponse<OdontologoDto>> findById(@PathVariable String matricula){
+        Odontologo entity = odontologoService.findByMatricula(matricula);
+        OdontologoDto dto = odontologoConverter.fromEntity(entity);
+        return new WrapperResponse<>(true,"Succes",dto).createResponse(HttpStatus.OK);
+    }
+
 }

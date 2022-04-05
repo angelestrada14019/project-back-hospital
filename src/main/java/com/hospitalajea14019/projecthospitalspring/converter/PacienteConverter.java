@@ -1,9 +1,9 @@
 package com.hospitalajea14019.projecthospitalspring.converter;
 
 import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
-import com.hospitalajea14019.projecthospitalspring.dto.OdontologoDto;
+
 import com.hospitalajea14019.projecthospitalspring.dto.PacienteDto;
-import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
+
 import com.hospitalajea14019.projecthospitalspring.model.Paciente;
 import org.springframework.stereotype.Component;
 
