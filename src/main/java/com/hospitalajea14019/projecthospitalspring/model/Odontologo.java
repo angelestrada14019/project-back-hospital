@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +25,7 @@ public class Odontologo extends Base {
     @Column(name = "matricula")
     private String matricula;
 
-    @OneToMany(mappedBy = "odontologo_id")
+    @OneToMany(mappedBy = "odontologo_id", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Turno> turnos=new HashSet<>();
 

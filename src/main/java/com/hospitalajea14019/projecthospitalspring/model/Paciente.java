@@ -7,8 +7,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Getter
 @Setter
@@ -28,12 +30,12 @@ public class Paciente extends Base {
     @Column(name = "fecha_ingreso")
     private LocalDate fechaIngreso;
 
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
+//    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id",nullable = false,updatable = false,referencedColumnName = "id")
     private Domicilio domicilio_id;
 
-    @OneToMany(mappedBy = "paciente_id")
+    @OneToMany(mappedBy = "paciente_id", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Turno> turnos=new HashSet<>();
+    private Set<Turno> turnos;
 }

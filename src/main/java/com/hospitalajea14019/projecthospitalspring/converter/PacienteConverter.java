@@ -1,5 +1,9 @@
 package com.hospitalajea14019.projecthospitalspring.converter;
 
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
 
 import com.hospitalajea14019.projecthospitalspring.dto.PacienteDto;
@@ -9,27 +13,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PacienteConverter extends AbstractConverter<Paciente, PacienteDto> {
+    ObjectMapper mapper =new ObjectMapper();
+
+    public PacienteConverter() {
+        mapper.findAndRegisterModules();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,false);
+    }
+
     @Override
     public PacienteDto fromEntity(Paciente entity) {
-        return PacienteDto.builder()
-                .id(entity.getId())
-                .nombre(entity.getNombre())
-                .apellido(entity.getApellido())
-                .dni(entity.getDni())
-                .fechaIngreso(entity.getFechaIngreso())
-                .domicilio_id(entity.getDomicilio_id())
-                .build();
+        return mapper.convertValue(entity,PacienteDto.class);
     }
 
     @Override
     public Paciente fromDto(PacienteDto dto) {
-        Paciente paciente=new Paciente();
-        paciente.setId(dto.getId());
-        paciente.setNombre(dto.getNombre());
-        paciente.setApellido(dto.getApellido());
-        paciente.setDni(dto.getDni());
-        paciente.setFechaIngreso(dto.getFechaIngreso());
-        paciente.setDomicilio_id(dto.getDomicilio_id());
-        return paciente;
+
+        return mapper.convertValue(dto,Paciente.class);
     }
 }

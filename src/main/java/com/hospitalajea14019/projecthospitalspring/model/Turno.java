@@ -17,11 +17,11 @@ import java.time.LocalTime;
 @Table(name = "turno")
 public class Turno extends Base {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id",nullable = false,updatable = false,referencedColumnName = "id")
     private Paciente paciente_id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "odontologo_id",nullable = false,updatable = false,referencedColumnName = "id")
     private Odontologo odontologo_id;
 
