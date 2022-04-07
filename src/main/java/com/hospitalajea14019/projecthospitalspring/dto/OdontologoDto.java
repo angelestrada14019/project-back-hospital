@@ -1,5 +1,6 @@
 package com.hospitalajea14019.projecthospitalspring.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hospitalajea14019.projecthospitalspring.model.Turno;
 import lombok.*;
@@ -19,6 +20,7 @@ public class OdontologoDto{
     private String nombre;
     private String apellido;
     private String matricula;
+    @JsonIgnore
     private Set<Turno> turnos;
 
 }
