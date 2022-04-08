@@ -1,6 +1,4 @@
 package com.hospitalajea14019.projecthospitalspring.validator;
-
-import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
 import com.hospitalajea14019.projecthospitalspring.model.Perfil;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
