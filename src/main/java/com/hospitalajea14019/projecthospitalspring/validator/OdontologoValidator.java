@@ -11,13 +11,13 @@ public class OdontologoValidator extends BaseValidator<Odontologo> {
 
     @Override
     public void validar(Odontologo odontologo){
-        if (odontologo.getMatricula()==null || odontologo.getMatricula().isEmpty()){
+        if (odontologo.getMatricula()==null || odontologo.getMatricula().trim().isEmpty()){
             throw new ValidateServiceExceptions("La matricula es obligatorioa");
         }
-        if (odontologo.getApellido()==null || odontologo.getApellido().isEmpty()){
+        if (odontologo.getApellido()==null || odontologo.getApellido().trim().isEmpty()){
             throw new ValidateServiceExceptions("El apellido es obligatorio");
         }
-        if (odontologo.getNombre()==null || odontologo.getNombre().isEmpty()){
+        if (odontologo.getNombre()==null || odontologo.getNombre().trim().isEmpty()){
             throw new ValidateServiceExceptions("El nombrte es obligatorio");
         }
         if (odontologo.getApellido().length()>100){
