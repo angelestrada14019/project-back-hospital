@@ -7,6 +7,7 @@ import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import com.hospitalajea14019.projecthospitalspring.repository.base.BaseRepository;
 import com.hospitalajea14019.projecthospitalspring.validator.BaseValidator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
@@ -17,6 +18,9 @@ import java.util.Optional;
 public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V extends BaseValidator<E>> implements BaseService<E,ID>{
 
     protected BaseRepository<E,ID> baseRepository;
+
+    @Autowired
+    private V validator;
 
     public BaseServiceImpl(BaseRepository<E,ID> baseRepository){
         this.baseRepository=baseRepository;
@@ -53,7 +57,6 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
     public E save(E entity) {
         try {
             //validator
-            V validator = null;
             validator.validar(entity);
             return  baseRepository.save(entity);
 
