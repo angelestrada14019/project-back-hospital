@@ -5,13 +5,14 @@ import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConver
 import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import com.hospitalajea14019.projecthospitalspring.service.base.BaseServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
+import com.hospitalajea14019.projecthospitalspring.validator.BaseValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public abstract class BaseControllerImpl<E extends Base,S extends BaseServiceImpl<E,Integer>,D,C extends AbstractConverter<E,D>> implements  BaseController<E,Integer,D>{
+public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Integer, V >, D, C extends AbstractConverter<E, D>,V extends BaseValidator<E>> implements  BaseController<E,Integer,D>{
 
 
 

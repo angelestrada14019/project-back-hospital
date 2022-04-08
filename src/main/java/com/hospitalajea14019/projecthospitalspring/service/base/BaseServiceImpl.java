@@ -5,6 +5,7 @@ import com.hospitalajea14019.projecthospitalspring.exceptions.NoDataFoundExcepti
 import com.hospitalajea14019.projecthospitalspring.exceptions.ValidateServiceExceptions;
 import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import com.hospitalajea14019.projecthospitalspring.repository.base.BaseRepository;
+import com.hospitalajea14019.projecthospitalspring.validator.BaseValidator;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.transaction.Transactional;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> implements BaseService<E,ID>{
+public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V extends BaseValidator<E>> implements BaseService<E,ID>{
 
     protected BaseRepository<E,ID> baseRepository;
 
@@ -52,6 +53,8 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> im
     public E save(E entity) {
         try {
             //validator
+            V validator = null;
+            validator.validar(entity);
             return  baseRepository.save(entity);
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
@@ -67,7 +70,8 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable> im
     @Override
     public E update(E entity) {
         try {
-            //validator
+            V validator = null;
+            validator.validar(entity);
             Optional<E> entityS=baseRepository.findById((ID) entity.getId());
             E entityU=entityS.orElseThrow(()-> new NoDataFoundExceptions("error al actualizar el id: " + entity.getId()));
             entityU=baseRepository.save(entity);
