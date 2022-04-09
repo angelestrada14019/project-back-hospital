@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/odontologo")
+@RequestMapping("/turno")
 @CrossOrigin(origins = "*")
 public class TurnoController extends BaseControllerImpl<Turno, TurnoServiceImpl, TurnoDto, TurnoConverter, TurnoValidator> {
     public TurnoController(TurnoServiceImpl servicio, TurnoConverter converter) {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/odontologo")
+@RequestMapping("/domicilio")
 @CrossOrigin(origins = "*")
 public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl, DomicilioDto, DomicilioConverter, DomicilioValidator> {
     public DomicilioController(DomicilioServiceImpl servicio, DomicilioConverter converter) {

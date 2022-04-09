@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/odontologo")
+@RequestMapping("/medicamento")
 @CrossOrigin(origins = "*")
 public class MedicamentoController extends BaseControllerImpl<Medicamento, MedicamentoServiceImpl, MedicamentoDto, MedicamentoConverter, MedicamentoValidator> {
     public MedicamentoController(MedicamentoServiceImpl servicio, MedicamentoConverter converter) {
