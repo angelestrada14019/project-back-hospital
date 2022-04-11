@@ -31,4 +31,11 @@ public class Turno extends Base {
     @Column(name = "hora")
     private LocalTime hora;
     //YYYY-MM-DD hh:mm:ss[.nnnnnnn]
+
+    public Integer getIdPaciente(){
+        return paciente_id.getId();
+    }
+    public Integer getIdOdontologo(){
+        return paciente_id.getId();
+    }
 }

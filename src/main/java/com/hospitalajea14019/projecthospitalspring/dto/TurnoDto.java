@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -20,12 +21,9 @@ import java.time.LocalTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TurnoDto {
 
-    private Paciente paciente_id;
-
-    private Odontologo odontologo_id;
-
-
+    private Integer id;
+    private Integer paciente_id;
+    private Integer odontologo_id;
     private LocalDate fecha;
-
     private LocalTime hora;
 }
