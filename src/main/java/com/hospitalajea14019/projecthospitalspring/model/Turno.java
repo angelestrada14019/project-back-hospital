@@ -17,12 +17,12 @@ import java.time.LocalTime;
 @Table(name = "turno")
 public class Turno extends Base {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paciente_id",nullable = false,updatable = false,referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "paciente_id",referencedColumnName = "id")
     private Paciente paciente_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "odontologo_id",nullable = false,updatable = false,referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "odontologo_id",referencedColumnName = "id")
     private Odontologo odontologo_id;
 
     @Column(name = "fecha")
@@ -30,12 +30,8 @@ public class Turno extends Base {
 
     @Column(name = "hora")
     private LocalTime hora;
+
     //YYYY-MM-DD hh:mm:ss[.nnnnnnn]
 
-    public Integer getIdPaciente(){
-        return paciente_id.getId();
-    }
-    public Integer getIdOdontologo(){
-        return paciente_id.getId();
-    }
+
 }

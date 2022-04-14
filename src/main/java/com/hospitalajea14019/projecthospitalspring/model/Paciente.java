@@ -31,11 +31,11 @@ public class Paciente extends Base {
     private LocalDate fechaIngreso;
 
 //    @ManyToOne
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id",nullable = false,updatable = false,referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "domicilio_id",nullable = false, updatable = false, referencedColumnName = "id")
     private Domicilio domicilio_id;
 
     @OneToMany(mappedBy = "paciente_id", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<Turno> turnos;
+    private Set<Turno> turnos=new HashSet<>();
 }

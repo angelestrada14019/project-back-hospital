@@ -30,8 +30,8 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
     @Override
     public List<E> findAll(){
         try {
-            List<E> entity = baseRepository.findAll();
-            return entity;
+            log.info("pase por findAll de service");
+            return baseRepository.findAll();
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);
@@ -47,9 +47,8 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
     @Transactional
     @Override
     public E findById(ID id) {
-        E entity = baseRepository.findById(id)
+        return baseRepository.findById(id)
                             .orElseThrow(() -> new NoDataFoundExceptions("no existe el id: " + id));
-        return entity;
     }
 
     @Transactional
@@ -58,6 +57,7 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
         try {
             //validator
             validator.validar(entity);
+            log.info("pase por save de service");
             return  baseRepository.save(entity);
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){

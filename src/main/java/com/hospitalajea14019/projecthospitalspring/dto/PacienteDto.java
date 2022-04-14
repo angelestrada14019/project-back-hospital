@@ -28,8 +28,9 @@ public class PacienteDto {
     private String nombre;
     private String dni;
     private LocalDate fechaIngreso;
+
     @JsonIgnore
     private Set<Turno> turnos;
-    @JsonIgnore
+
     private Domicilio domicilio_id;
 }
