@@ -35,11 +35,12 @@ public class TurnoConverter extends AbstractConverter<Turno, TurnoDto> {
     @Override
     public Turno fromDto(TurnoDto dto) {
         log.info("pase por converter fromDto");
-        return Turno.builder()
-                .fecha(dto.getFecha())
-                .hora(dto.getHora())
-                .odontologo_id(dto.getOdontologo_id())
-                .paciente_id(dto.getPaciente_id())
-                .build();
+        Turno t = new Turno();
+        t.setId(dto.getId());
+        t.setFecha(dto.getFecha());
+        t.setHora(dto.getHora());
+        t.setOdontologo_id(dto.getOdontologo_id());
+        t.setPaciente_id(dto.getPaciente_id());
+        return t;
     }
 }

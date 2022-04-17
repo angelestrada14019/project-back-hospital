@@ -73,9 +73,11 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
     @Override
     public E update(E entity) {
         try {
-            V validator = null;
+           
             validator.validar(entity);
+            log.info("despues de validator");
             Optional<E> entityS=baseRepository.findById((ID) entity.getId());
+            log.info("despues de entityS");
             E entityU=entityS.orElseThrow(()-> new NoDataFoundExceptions("error al actualizar el id: " + entity.getId()));
             entityU=baseRepository.save(entity);
             return entityU;

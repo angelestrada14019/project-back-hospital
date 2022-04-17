@@ -37,12 +37,14 @@ public class PacienteConverter extends AbstractConverter<Paciente, PacienteDto> 
     @Override
     public Paciente fromDto(PacienteDto dto) {
         log.info("pase por converter fromDto");
-        return Paciente.builder()
-                .nombre(dto.getNombre())
-                .apellido(dto.getApellido())
-                .dni(dto.getDni())
-                .domicilio_id(dto.getDomicilio_id())
-                .fechaIngreso(dto.getFechaIngreso())
-                .build();
+        Paciente p = new Paciente();
+        p.setId(dto.getId());
+        p.setApellido(dto.getApellido());
+        p.setNombre(dto.getNombre());
+        p.setDni(dto.getDni());
+        p.setDomicilio_id(dto.getDomicilio_id());
+        p.setFechaIngreso(dto.getFechaIngreso());
+
+        return p;
     }
 }

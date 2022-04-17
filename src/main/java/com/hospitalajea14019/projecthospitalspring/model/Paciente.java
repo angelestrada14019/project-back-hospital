@@ -32,7 +32,7 @@ public class Paciente extends Base {
 
 //    @ManyToOne
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "domicilio_id",nullable = false, updatable = false, referencedColumnName = "id")
+    @JoinColumn(name = "domicilio_id",nullable = false, updatable = false, referencedColumnName = "id", unique = true)
     private Domicilio domicilio_id;
 
     @OneToMany(mappedBy = "paciente_id", fetch = FetchType.LAZY)
