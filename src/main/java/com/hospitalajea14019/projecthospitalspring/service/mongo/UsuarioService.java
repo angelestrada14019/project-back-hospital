@@ -44,7 +44,9 @@ public class UsuarioService {
     @Transactional
     public Usuario findUsuarioByEmail(String email){
         try {
-            return usuarioRepository.findUsuarioByEmail(email);
+            Optional<Usuario> usuario = Optional.ofNullable(usuarioRepository.findUsuarioByEmail(email));
+            Usuario usuario1 = usuario.orElseThrow(() -> new NoDataFoundExceptions("no existe el email: " + email));
+            return usuario1;
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
             log.info(e.getMessage(),e);

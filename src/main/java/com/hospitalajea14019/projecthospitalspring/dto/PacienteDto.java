@@ -31,6 +31,6 @@ public class PacienteDto {
 
     @JsonIgnore
     private Set<Turno> turnos;
-
+    @JsonIgnoreProperties(value = {"calle","numero", "localidad", "provincia"})
     private Domicilio domicilio_id;
 }

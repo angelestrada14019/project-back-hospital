@@ -1,5 +1,7 @@
 package com.hospitalajea14019.projecthospitalspring.controller.mongo;
 
+import com.hospitalajea14019.projecthospitalspring.converter.mongo.UsuarioConverter;
+import com.hospitalajea14019.projecthospitalspring.dto.mongo.UsuarioDto;
 import com.hospitalajea14019.projecthospitalspring.model.mongo.Usuario;
 import com.hospitalajea14019.projecthospitalspring.service.mongo.UsuarioService;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
@@ -14,35 +16,41 @@ import java.util.List;
 public class UsuarioController {
 
     private UsuarioService usuarioService;
+    private UsuarioConverter usuarioConverter;
 
-    public UsuarioController(UsuarioService booksService) {
-        this.usuarioService = booksService;
+    public UsuarioController(UsuarioService usuarioService, UsuarioConverter usuarioConverter) {
+        this.usuarioService = usuarioService;
+        this.usuarioConverter=usuarioConverter;
     }
     @GetMapping("")
-    public ResponseEntity<WrapperResponse<List<Usuario>>> findAll(){
+    public ResponseEntity<WrapperResponse<List<UsuarioDto>>> findAll(){
         List<Usuario> usuarios=usuarioService.findAll();
-        return new WrapperResponse<>(true,"Succes",usuarios).createResponse(HttpStatus.OK);
+        List<UsuarioDto> dtos = usuarioConverter.fromEntity(usuarios);
+        return new WrapperResponse<>(true,"Succes",dtos).createResponse(HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<WrapperResponse<Usuario>> findById(@PathVariable String id){
-        //String idS=String.valueOf(id);
+    public ResponseEntity<WrapperResponse<UsuarioDto>> findById(@PathVariable String id){
         Usuario usuario=usuarioService.findById(id);
-        return new WrapperResponse<>(true,"Succes",usuario).createResponse(HttpStatus.OK);
+        UsuarioDto usuarioDto=usuarioConverter.fromEntity(usuario);
+        return new WrapperResponse<>(true,"Succes",usuarioDto).createResponse(HttpStatus.OK);
     }
     @GetMapping({"/email/{email}"})
-    public ResponseEntity<WrapperResponse<Usuario>>  findUsuarioByEmail(@PathVariable String email){
+    public ResponseEntity<WrapperResponse<UsuarioDto>>  findUsuarioByEmail(@PathVariable String email){
         Usuario usuario =usuarioService.findUsuarioByEmail(email);
-        return new WrapperResponse<>(true,"Succes",usuario).createResponse(HttpStatus.OK);
+        UsuarioDto usuarioDto =usuarioConverter.fromEntity(usuario);
+        return new WrapperResponse<>(true,"Succes",usuarioDto).createResponse(HttpStatus.OK);
     }
     @PostMapping("")
-    public ResponseEntity<WrapperResponse<Usuario>> save(@RequestBody Usuario usuario) {
-        Usuario usuario1=usuarioService.save(usuario);
-        return new WrapperResponse<>(true,"Create Succes",usuario1).createResponse(HttpStatus.CREATED);
+    public ResponseEntity<WrapperResponse<UsuarioDto>> save(@RequestBody UsuarioDto usuarioDto) {
+        Usuario usuario1=usuarioService.save(usuarioConverter.fromDto(usuarioDto));
+        UsuarioDto usuarioDto1=usuarioConverter.fromEntity(usuario1);
+        return new WrapperResponse<>(true,"Create Succes",usuarioDto1).createResponse(HttpStatus.CREATED);
     }
     @PutMapping("")
-    public ResponseEntity<WrapperResponse<Usuario>> update(@RequestBody Usuario usuario) {
-        Usuario usuario1=usuarioService.update(usuario);
-        return new WrapperResponse<>(true,"Update Succes",usuario1).createResponse(HttpStatus.OK);
+    public ResponseEntity<WrapperResponse<UsuarioDto>> update(@RequestBody UsuarioDto usuarioDto) {
+        Usuario usuario1=usuarioService.update(usuarioConverter.fromDto(usuarioDto));
+        UsuarioDto usuarioDto1 =usuarioConverter.fromEntity(usuario1);
+        return new WrapperResponse<>(true,"Update Succes",usuarioDto1).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<WrapperResponse<Boolean>> delete(@PathVariable String id) {
