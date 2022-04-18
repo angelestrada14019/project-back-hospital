@@ -28,8 +28,7 @@ public class JwtTokenProvider {//se va a generar el token, obtener y geenrar las
         return token;
     }
     public String getEmailFromToken(String token){
-        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-        return claims.getSubject();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
     public Boolean validateToken(String token){
