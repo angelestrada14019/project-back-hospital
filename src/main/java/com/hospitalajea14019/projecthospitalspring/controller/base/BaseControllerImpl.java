@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@PreAuthorize("hasAnyRole('administrador','paciente','odontologo')")
 public abstract class BaseControllerImpl<E extends Base,
         S extends BaseServiceImpl<E, Integer, V >, D, C extends AbstractConverter<E, D>,
         V extends BaseValidator<E>> implements  BaseController<E,Integer,D> {

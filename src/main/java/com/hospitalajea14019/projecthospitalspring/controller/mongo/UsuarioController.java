@@ -5,9 +5,11 @@ import com.hospitalajea14019.projecthospitalspring.dto.mongo.UsuarioDto;
 import com.hospitalajea14019.projecthospitalspring.model.mongo.Usuario;
 import com.hospitalajea14019.projecthospitalspring.service.mongo.UsuarioService;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +21,9 @@ public class UsuarioController {
 
     private UsuarioService usuarioService;
     private UsuarioConverter usuarioConverter;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     public UsuarioController(UsuarioService usuarioService, UsuarioConverter usuarioConverter) {
         this.usuarioService = usuarioService;
@@ -48,14 +53,18 @@ public class UsuarioController {
     @PostMapping("")
     @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
     public ResponseEntity<WrapperResponse<UsuarioDto>> save(@Valid @RequestBody UsuarioDto usuarioDto) { //el valid al costado del requestBody
-        Usuario usuario1=usuarioService.save(usuarioConverter.fromDto(usuarioDto));
+        Usuario usuarioS =usuarioConverter.fromDto(usuarioDto);
+        usuarioS.setClave(passwordEncoder.encode(usuarioS.getClave()));
+        Usuario usuario1=usuarioService.save(usuarioS);
         UsuarioDto usuarioDto1=usuarioConverter.fromEntity(usuario1);
         return new WrapperResponse<>(true,"Create Succes",usuarioDto1).createResponse(HttpStatus.CREATED);
     }
     @PutMapping("")
     @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
     public ResponseEntity<WrapperResponse<UsuarioDto>> update(@Valid @RequestBody UsuarioDto usuarioDto) {
-        Usuario usuario1=usuarioService.update(usuarioConverter.fromDto(usuarioDto));
+        Usuario usuarioS =usuarioConverter.fromDto(usuarioDto);
+        usuarioS.setClave(passwordEncoder.encode(usuarioS.getClave()));
+        Usuario usuario1=usuarioService.update(usuarioS);
         UsuarioDto usuarioDto1 =usuarioConverter.fromEntity(usuario1);
         return new WrapperResponse<>(true,"Update Succes",usuarioDto1).createResponse(HttpStatus.OK);
     }

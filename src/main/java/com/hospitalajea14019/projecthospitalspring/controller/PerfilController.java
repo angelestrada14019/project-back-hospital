@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/perfil")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasRole('administrador')")
 public class PerfilController extends BaseControllerImpl<Perfil, PerfilServiceImpl, PerfilDto, PerfilConverter, PerfilValidator> {
     public PerfilController(PerfilServiceImpl servicio, PerfilConverter converter) {
         super(servicio, converter);

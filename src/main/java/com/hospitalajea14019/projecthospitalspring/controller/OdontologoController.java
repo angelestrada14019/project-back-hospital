@@ -23,7 +23,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/odontologo")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasAnyRole('administrador','odontologo')")
 public class OdontologoController extends BaseControllerImpl<Odontologo,OdontologoServiceImpl,OdontologoDto,OdontologoConverter, OdontologoValidator> {
 
     @Autowired

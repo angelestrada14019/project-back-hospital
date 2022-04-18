@@ -40,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
                 .antMatchers(
                         "/auth/**"
                 ).permitAll()
+                .antMatchers("/odontologo/**").hasAnyRole("administrador","odontologo")
+                .antMatchers("/paciente/**").hasAnyRole("administrador","paciente")
+                .antMatchers("/domicilio/**").hasAnyRole("administrador","paciente")
+                .antMatchers("/turno/**").hasRole("administrador")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -63,13 +67,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
 //    }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception { //crear roles y usuarios personalizados
         auth.userDetailsService(usuarioDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {//para poder autenticarse
         return super.authenticationManagerBean();
     }
 }

@@ -29,8 +29,7 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private PerfilServiceImpl perfilService;
+
     @Autowired
     private UsuarioConverter usuarioConverter;
 

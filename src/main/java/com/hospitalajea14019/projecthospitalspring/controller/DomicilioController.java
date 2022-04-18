@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/domicilio")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasAnyRole('administrador','paciente')")
 public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl, DomicilioDto, DomicilioConverter, DomicilioValidator> {
     public DomicilioController(DomicilioServiceImpl servicio, DomicilioConverter converter) {
         super(servicio, converter);

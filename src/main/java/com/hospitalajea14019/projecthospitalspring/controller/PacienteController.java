@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/paciente")
 @CrossOrigin(origins = "*")
-@PreAuthorize("hasAnyRole('administrador','paciente')")
 public class PacienteController extends BaseControllerImpl<Paciente,
         PacienteServiceImpl, PacienteDto, PacienteConverter, PacienteValidator> {
     public PacienteController(PacienteServiceImpl servicio, PacienteConverter converter) {
