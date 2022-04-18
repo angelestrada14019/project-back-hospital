@@ -1,21 +1,26 @@
 package com.hospitalajea14019.projecthospitalspring.config;
 
+import com.hospitalajea14019.projecthospitalspring.security.JwtAuthenticationEntryPoint;
+import com.hospitalajea14019.projecthospitalspring.security.JwtAuthenticationFilter;
 import com.hospitalajea14019.projecthospitalspring.security.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity //clase de seguridad personalizada
@@ -25,6 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
     @Autowired
     private UsuarioDetailsService usuarioDetailsService;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter(){
+        return new JwtAuthenticationFilter();
+    }
+
     @Bean //genere un objeto bean, se debe crear bajo la anotacion configuration
     BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -33,21 +46,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers(
-                        HttpMethod.GET,
-                        "/perfil/**")
-                .permitAll()
-                .antMatchers(
-                        "/auth/**"
-                ).permitAll()
-                .antMatchers("/odontologo/**").hasAnyRole("administrador","odontologo")
-                .antMatchers("/paciente/**").hasAnyRole("administrador","paciente")
-                .antMatchers("/domicilio/**").hasAnyRole("administrador","paciente")
-                .antMatchers("/turno/**").hasRole("administrador")
-                .anyRequest()
-                .authenticated()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint) //manejar excepcion
                 .and()
-                .httpBasic();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // sin estado
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/perfil/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
+                .anyRequest()
+                .authenticated();
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); //autenticacion por token (filtro usado y la clase del filtro
     }
 
 //    @Override

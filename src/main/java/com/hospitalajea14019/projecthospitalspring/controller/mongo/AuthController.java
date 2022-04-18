@@ -2,8 +2,10 @@ package com.hospitalajea14019.projecthospitalspring.controller.mongo;
 
 import com.hospitalajea14019.projecthospitalspring.converter.mongo.UsuarioConverter;
 import com.hospitalajea14019.projecthospitalspring.dto.mongo.LoginRequestDto;
+import com.hospitalajea14019.projecthospitalspring.dto.mongo.LoginResponseUserDto;
 import com.hospitalajea14019.projecthospitalspring.dto.mongo.UsuarioDto;
 import com.hospitalajea14019.projecthospitalspring.model.mongo.Usuario;
+import com.hospitalajea14019.projecthospitalspring.security.JwtTokenProvider;
 import com.hospitalajea14019.projecthospitalspring.service.PerfilServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.service.mongo.UsuarioService;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
@@ -36,14 +38,22 @@ public class AuthController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
     @PostMapping("login")
-    public ResponseEntity<WrapperResponse<UsuarioDto>> authenticateUser(@RequestBody LoginRequestDto loginRequestDto){
+    public ResponseEntity<WrapperResponse<LoginResponseUserDto>> login(@RequestBody LoginRequestDto loginRequestDto){
         Usuario usuario = usuarioService.findUsuarioByEmail(loginRequestDto.getEmail());
         UsuarioDto usuarioDto =usuarioConverter.fromEntity(usuario);
+
         Authentication authentication=authenticationManager.authenticate(new
                 UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getClave()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return  new WrapperResponse<>(true,"Auth Succes",usuarioDto).createResponse(HttpStatus.OK);
+        //obtener token
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        LoginResponseUserDto loginResponseUserDto =new LoginResponseUserDto(usuarioDto,token);
+        return  new WrapperResponse<>(true,"Auth Succes",loginResponseUserDto).createResponse(HttpStatus.OK);
     }
 
     @PostMapping("register")
