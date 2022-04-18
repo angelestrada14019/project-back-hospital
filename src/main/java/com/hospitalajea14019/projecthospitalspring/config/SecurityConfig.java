@@ -55,6 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/perfil/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/odontologo/**").hasAnyRole("administrador","odontologo")
+                .antMatchers("/paciente/**").hasAnyRole("administrador","paciente")
+                .antMatchers("/domicilio/**").hasAnyRole("administrador","paciente")
+                .antMatchers("/turno/**").hasRole("administrador")
                 .anyRequest()
                 .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); //autenticacion por token (filtro usado y la clase del filtro
