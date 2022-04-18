@@ -21,6 +21,6 @@ INSERT INTO turno (odontologo_id,paciente_id,fecha,hora) VALUES (3,1,'2022-10-24
 INSERT INTO turno (odontologo_id,paciente_id,fecha,hora) VALUES (3,2,'2022-10-24', '02:30:00');
 INSERT INTO turno (odontologo_id,paciente_id,fecha,hora) VALUES (3,3,'2022-10-24',' 02:30:00');
 
-INSERT INTO perfil (nombre) VALUES ('paciente');
-INSERT INTO perfil (nombre) VALUES ('odontologo');
-INSERT INTO perfil (nombre) VALUES ('administrador');
+INSERT INTO perfil (nombre) VALUES ('PACI');
+INSERT INTO perfil (nombre) VALUES ('ODO');
+INSERT INTO perfil (nombre) VALUES ('ADMIN');

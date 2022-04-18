@@ -45,7 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .cors().and().csrf().disable()
+
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint) //manejar excepcion
                 .and()
@@ -55,10 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { //redefinir a
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/perfil/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/odontologo/**").hasAnyRole("administrador","odontologo")
-                .antMatchers("/paciente/**").hasAnyRole("administrador","paciente")
-                .antMatchers("/domicilio/**").hasAnyRole("administrador","paciente")
-                .antMatchers("/turno/**").hasRole("administrador")
+                .antMatchers("/odontologo/**").hasAnyRole("ADMIN","ODO")
+                .antMatchers("/paciente/**").hasAnyRole("ADMIN","PACI")
+                .antMatchers("/domicilio/**").hasAnyRole("ADMIN","PACI")
+                .antMatchers("/turno/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); //autenticacion por token (filtro usado y la clase del filtro

@@ -30,28 +30,28 @@ public class UsuarioController {
         this.usuarioConverter=usuarioConverter;
     }
     @GetMapping("")
-    @PreAuthorize("hasRole('administrador')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<WrapperResponse<List<UsuarioDto>>> findAll(){
         List<Usuario> usuarios=usuarioService.findAll();
         List<UsuarioDto> dtos = usuarioConverter.fromEntity(usuarios);
         return new WrapperResponse<>(true,"Succes",dtos).createResponse(HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
+    @PreAuthorize("hasAnyRole('ADMIN','ODO','PACI')")
     public ResponseEntity<WrapperResponse<UsuarioDto>> findById(@PathVariable String id){
         Usuario usuario=usuarioService.findById(id);
         UsuarioDto usuarioDto=usuarioConverter.fromEntity(usuario);
         return new WrapperResponse<>(true,"Succes",usuarioDto).createResponse(HttpStatus.OK);
     }
     @GetMapping({"/email/{email}"})
-    @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
+    @PreAuthorize("hasAnyRole('ADMIN','ODO','PACI')")
     public ResponseEntity<WrapperResponse<UsuarioDto>>  findUsuarioByEmail(@PathVariable String email){
         Usuario usuario =usuarioService.findUsuarioByEmail(email);
         UsuarioDto usuarioDto =usuarioConverter.fromEntity(usuario);
         return new WrapperResponse<>(true,"Succes",usuarioDto).createResponse(HttpStatus.OK);
     }
     @PostMapping("")
-    @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
+    @PreAuthorize("hasAnyRole('ADMIN','ODO','PACI')")
     public ResponseEntity<WrapperResponse<UsuarioDto>> save(@Valid @RequestBody UsuarioDto usuarioDto) { //el valid al costado del requestBody
         Usuario usuarioS =usuarioConverter.fromDto(usuarioDto);
         usuarioS.setClave(passwordEncoder.encode(usuarioS.getClave()));
@@ -60,7 +60,7 @@ public class UsuarioController {
         return new WrapperResponse<>(true,"Create Succes",usuarioDto1).createResponse(HttpStatus.CREATED);
     }
     @PutMapping("")
-    @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
+    @PreAuthorize("hasAnyRole('ADMIN','ODO','PACI')")
     public ResponseEntity<WrapperResponse<UsuarioDto>> update(@Valid @RequestBody UsuarioDto usuarioDto) {
         Usuario usuarioS =usuarioConverter.fromDto(usuarioDto);
         usuarioS.setClave(passwordEncoder.encode(usuarioS.getClave()));
@@ -69,7 +69,7 @@ public class UsuarioController {
         return new WrapperResponse<>(true,"Update Succes",usuarioDto1).createResponse(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('administrador','odontologo','paciente')")
+    @PreAuthorize("hasAnyRole('ADMIN','ODO','PACI')")
     public ResponseEntity<WrapperResponse<Boolean>> delete(@PathVariable String id) {
         Boolean deletS= usuarioService.delete(id);
         return new WrapperResponse<>(true,"Delete Succes",deletS).createResponse(HttpStatus.OK);
