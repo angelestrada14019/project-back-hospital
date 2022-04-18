@@ -42,9 +42,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 //cargar usuario asociado al token
                 UserDetails userDetails = usuarioDetailsService.loadUserByUsername(username);
                 log.info("authorities: " + userDetails.getAuthorities());
+                //autenticar al usuario con el token
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails,null,  userDetails.getAuthorities());
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                //detalles adicionales sobre la solicitud de autenticación. Estos pueden ser una dirección IP, número de serie del certificado
+                //authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 //establecer seguridad
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
