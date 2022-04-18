@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -17,15 +19,20 @@ public class Usuario {
 
     @Id
     private String id;
+
     @Field(name = "perfil_id")
     private Integer perfil_id;
+
     @Field(name = "odontologo_id")
     private Integer odontologo_id;
+
     @Field(name = "paciente_id")
     private Integer paciente_id;
+
     @Field(name = "email")
     @Indexed(unique = true)
     private String email;
+
     @Field(name = "clave")
     private String clave;
 

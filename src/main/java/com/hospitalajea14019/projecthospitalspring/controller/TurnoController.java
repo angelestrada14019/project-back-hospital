@@ -11,6 +11,7 @@ import com.hospitalajea14019.projecthospitalspring.service.OdontologoServiceImpl
 import com.hospitalajea14019.projecthospitalspring.service.TurnoServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.validator.OdontologoValidator;
 import com.hospitalajea14019.projecthospitalspring.validator.TurnoValidator;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/turno")
 @CrossOrigin(origins = "*")
+@PreAuthorize("hasRole('administrador')")
 public class TurnoController extends BaseControllerImpl<Turno, TurnoServiceImpl, TurnoDto, TurnoConverter, TurnoValidator> {
     public TurnoController(TurnoServiceImpl servicio, TurnoConverter converter) {
         super(servicio, converter);

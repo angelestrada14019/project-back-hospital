@@ -27,6 +27,7 @@ public class Odontologo extends Base {
 
     @OneToMany(mappedBy = "odontologo_id", fetch = FetchType.LAZY)
     @JsonIgnore
+    //@JsonBackReference
     private Set<Turno> turnos=new HashSet<>();
 
 

@@ -9,13 +9,16 @@ import com.hospitalajea14019.projecthospitalspring.validator.BaseValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
-public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Integer, V >, D, C extends AbstractConverter<E, D>,V extends BaseValidator<E>> implements  BaseController<E,Integer,D>{
-
+@PreAuthorize("hasAnyRole('administrador','paciente','odontologo')")
+public abstract class BaseControllerImpl<E extends Base,
+        S extends BaseServiceImpl<E, Integer, V >, D, C extends AbstractConverter<E, D>,
+        V extends BaseValidator<E>> implements  BaseController<E,Integer,D> {
 
 
     private S servicio;
@@ -26,7 +29,6 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
         this.servicio = servicio;
         this.converter = converter;
     }
-
 
 
     @GetMapping("")
@@ -41,35 +43,37 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<WrapperResponse<D>> findById(@PathVariable Integer id){
+    public ResponseEntity<WrapperResponse<D>> findById(@PathVariable Integer id) {
         E entity = servicio.findById(id);
         D dto = converter.fromEntity(entity);
-        return new WrapperResponse<>(true,"Succes",dto).createResponse(HttpStatus.OK);
+        return new WrapperResponse<>(true, "Succes", dto).createResponse(HttpStatus.OK);
     }
 
     @PostMapping("")
     @Override
-    public ResponseEntity<WrapperResponse<D>> save(@RequestBody D dto) {
-        E entity=servicio.save(converter.fromDto(dto));
+    public ResponseEntity<WrapperResponse<D>> save(@RequestBody D dto) {//@Valid
+        E entity = servicio.save(converter.fromDto(dto));
         log.info("pase por save de controller");
-        D dtoS= converter.fromEntity(entity);
+        D dtoS = converter.fromEntity(entity);
 
-        return new WrapperResponse<>(true,"Create Succes",dtoS).createResponse(HttpStatus.CREATED);
+        return new WrapperResponse<>(true, "Create Succes", dtoS).createResponse(HttpStatus.CREATED);
     }
 
     @PutMapping("")
     @Override
-    public ResponseEntity<WrapperResponse<D>> update(@RequestBody D dto) {
-        E entity=servicio.update(converter.fromDto(dto));
-        D dtoS= converter.fromEntity(entity);
+    public ResponseEntity<WrapperResponse<D>> update(@RequestBody D dto) {//@Valid
+        E entity = servicio.update(converter.fromDto(dto));
+        D dtoS = converter.fromEntity(entity);
 
-        return new WrapperResponse<>(true,"Update Succes",dtoS).createResponse(HttpStatus.OK);
+        return new WrapperResponse<>(true, "Update Succes", dtoS).createResponse(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @Override
     public ResponseEntity<WrapperResponse<Boolean>> delete(@PathVariable Integer id) {
-        Boolean deletS= servicio.delete(id);
-        return new WrapperResponse<>(true,"Delete Succes",deletS).createResponse(HttpStatus.OK);
+        Boolean deletS = servicio.delete(id);
+        return new WrapperResponse<>(true, "Delete Succes", deletS).createResponse(HttpStatus.OK);
     }
 }
+
+

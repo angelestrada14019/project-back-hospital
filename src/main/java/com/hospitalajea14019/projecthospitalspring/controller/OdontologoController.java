@@ -15,6 +15,7 @@ import com.hospitalajea14019.projecthospitalspring.validator.OdontologoValidator
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/odontologo")
 @CrossOrigin(origins = "*")
+@PreAuthorize("hasAnyRole('administrador','odontologo')")
 public class OdontologoController extends BaseControllerImpl<Odontologo,OdontologoServiceImpl,OdontologoDto,OdontologoConverter, OdontologoValidator> {
 
     @Autowired

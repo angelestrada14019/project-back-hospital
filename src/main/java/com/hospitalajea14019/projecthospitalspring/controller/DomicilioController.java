@@ -11,6 +11,7 @@ import com.hospitalajea14019.projecthospitalspring.service.DomicilioServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.service.OdontologoServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.validator.DomicilioValidator;
 import com.hospitalajea14019.projecthospitalspring.validator.OdontologoValidator;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/domicilio")
 @CrossOrigin(origins = "*")
+@PreAuthorize("hasAnyRole('administrador','paciente')")
 public class DomicilioController extends BaseControllerImpl<Domicilio, DomicilioServiceImpl, DomicilioDto, DomicilioConverter, DomicilioValidator> {
     public DomicilioController(DomicilioServiceImpl servicio, DomicilioConverter converter) {
         super(servicio, converter);

@@ -13,4 +13,5 @@ public interface BaseController<E extends Base,ID extends Serializable,D> {
     public ResponseEntity<?> save(D entity);
     public ResponseEntity<?> update(D entity);
     public ResponseEntity<?> delete(ID id);
+
 }

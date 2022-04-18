@@ -57,6 +57,9 @@ public class UsuarioService {
             throw new GeneralServicesExceptions(e.getMessage(),e);
         }
     }
+    public Boolean existsUsuarioByEmail(String email){
+        return usuarioRepository.existsUsuarioByEmail(email);
+    }
     @Transactional
     public Usuario save(Usuario usuario) {
         try {

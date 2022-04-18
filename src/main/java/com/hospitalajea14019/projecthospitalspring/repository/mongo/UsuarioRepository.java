@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends MongoRepository<Usuario,String> {
     public Usuario findUsuarioByEmail(String email);
+    public Boolean existsUsuarioByEmail(String email);
 }
