@@ -1,6 +1,6 @@
 package com.hospitalajea14019.projecthospitalspring.repository;
 
-import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
+
 import com.hospitalajea14019.projecthospitalspring.model.Turno;
 import com.hospitalajea14019.projecthospitalspring.repository.base.BaseRepository;
 import org.springframework.data.jpa.repository.Query;

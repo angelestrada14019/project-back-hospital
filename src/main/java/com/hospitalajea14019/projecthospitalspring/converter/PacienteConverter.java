@@ -3,7 +3,6 @@ package com.hospitalajea14019.projecthospitalspring.converter;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
 
 import com.hospitalajea14019.projecthospitalspring.dto.PacienteDto;

@@ -6,7 +6,6 @@ import com.hospitalajea14019.projecthospitalspring.dto.mongo.LoginResponseUserDt
 import com.hospitalajea14019.projecthospitalspring.dto.mongo.UsuarioDto;
 import com.hospitalajea14019.projecthospitalspring.model.mongo.Usuario;
 import com.hospitalajea14019.projecthospitalspring.security.JwtTokenProvider;
-import com.hospitalajea14019.projecthospitalspring.service.PerfilServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.service.mongo.UsuarioService;
 import com.hospitalajea14019.projecthospitalspring.utils.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;

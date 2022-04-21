@@ -1,8 +1,5 @@
 package com.hospitalajea14019.projecthospitalspring.converter;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hospitalajea14019.projecthospitalspring.converter.base.AbstractConverter;
 import com.hospitalajea14019.projecthospitalspring.dto.TurnoDto;
 import com.hospitalajea14019.projecthospitalspring.model.Turno;

@@ -1,7 +1,7 @@
 package com.hospitalajea14019.projecthospitalspring.controller;
 
 
-import com.hospitalajea14019.projecthospitalspring.controller.base.BaseController;
+
 import com.hospitalajea14019.projecthospitalspring.controller.base.BaseControllerImpl;
 import com.hospitalajea14019.projecthospitalspring.converter.OdontologoConverter;
 import com.hospitalajea14019.projecthospitalspring.dto.OdontologoDto;
@@ -15,7 +15,6 @@ import com.hospitalajea14019.projecthospitalspring.validator.OdontologoValidator
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

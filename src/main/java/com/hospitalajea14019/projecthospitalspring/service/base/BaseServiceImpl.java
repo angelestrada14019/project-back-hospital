@@ -7,7 +7,6 @@ import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 import com.hospitalajea14019.projecthospitalspring.repository.base.BaseRepository;
 import com.hospitalajea14019.projecthospitalspring.validator.BaseValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;

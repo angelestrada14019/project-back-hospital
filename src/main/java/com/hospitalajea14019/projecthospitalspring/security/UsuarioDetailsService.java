@@ -1,10 +1,7 @@
 package com.hospitalajea14019.projecthospitalspring.security;
 
-import com.hospitalajea14019.projecthospitalspring.exceptions.NoDataFoundExceptions;
 import com.hospitalajea14019.projecthospitalspring.model.Perfil;
 import com.hospitalajea14019.projecthospitalspring.model.mongo.Usuario;
-import com.hospitalajea14019.projecthospitalspring.repository.mongo.UsuarioRepository;
-import com.hospitalajea14019.projecthospitalspring.service.PerfilService;
 import com.hospitalajea14019.projecthospitalspring.service.PerfilServiceImpl;
 import com.hospitalajea14019.projecthospitalspring.service.mongo.UsuarioService;
 import lombok.extern.slf4j.Slf4j;

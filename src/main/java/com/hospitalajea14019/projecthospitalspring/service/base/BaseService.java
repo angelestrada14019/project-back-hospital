@@ -1,6 +1,6 @@
 package com.hospitalajea14019.projecthospitalspring.service.base;
 
-import com.hospitalajea14019.projecthospitalspring.exceptions.NoDataFoundExceptions;
+
 import com.hospitalajea14019.projecthospitalspring.model.base.Base;
 
 import java.io.Serializable;

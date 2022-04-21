@@ -1,6 +1,5 @@
 package com.hospitalajea14019.projecthospitalspring.service;
 
-import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
 import com.hospitalajea14019.projecthospitalspring.model.Turno;
 import com.hospitalajea14019.projecthospitalspring.service.base.BaseService;
 

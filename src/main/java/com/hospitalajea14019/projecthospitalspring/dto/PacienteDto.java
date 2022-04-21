@@ -7,12 +7,7 @@ import com.hospitalajea14019.projecthospitalspring.model.Domicilio;
 import com.hospitalajea14019.projecthospitalspring.model.Turno;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Getter

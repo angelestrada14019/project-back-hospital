@@ -1,12 +1,9 @@
 package com.hospitalajea14019.projecthospitalspring.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
 import com.hospitalajea14019.projecthospitalspring.model.Paciente;
 import lombok.*;
-
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
