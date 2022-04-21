@@ -33,19 +33,22 @@ public class JwtTokenProvider {//se va a generar el token, obtener y geenrar las
 
     public Boolean validateToken(String token){
         try {
-            log.info("antes de validar");
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
-            log.info("despues de validar");
             return true;
         }catch (SignatureException e){
+            log.error("firma no valida "+e.getMessage());
             throw new ValidateServiceExceptions("firma jwt no valida");
         }catch (MalformedJwtException e){
+            log.error("token no valido "+e.getMessage());
             throw new ValidateServiceExceptions("Token jwt no valido");
         }catch (ExpiredJwtException e){
+            log.error("token caducado "+e.getMessage());
             throw new ValidateServiceExceptions("Token jwt caducado");
         }catch (UnsupportedJwtException e){
+            log.error("token no compatible "+e.getMessage());
             throw new ValidateServiceExceptions("Token jwt no compatible");
         }catch (IllegalArgumentException e){
+            log.error("La cadena esta vacia "+e.getMessage());
             throw new ValidateServiceExceptions("La cadena del pyload esta vacia");
         }
     }

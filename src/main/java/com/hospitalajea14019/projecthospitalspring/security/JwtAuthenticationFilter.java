@@ -30,18 +30,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         //obtener el token
-        log.info("request in filter: "+request);
         String token = obtainJwtFromRequest(request);
-        log.info("token in filter: "+ token);
         //validar token
         try {
             if (StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
                 //obtener el username del token
                 String username = jwtTokenProvider.getEmailFromToken(token);
-                log.info("usuario: " + username);
                 //cargar usuario asociado al token
                 UserDetails userDetails = usuarioDetailsService.loadUserByUsername(username);
-                log.info("authorities: " + userDetails.getAuthorities());
                 //autenticar al usuario con el token
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails,null,  userDetails.getAuthorities());

@@ -33,7 +33,6 @@ public class UsuarioDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {//buscar ususario por username
         Usuario usuario =usuarioService.findUsuarioByEmail(email);
         Perfil perfil =perfilService.findById(usuario.getPerfil_id());
-        log.info("despues de obtener perfil en usuarioDetails "+perfil.getNombre());
         return new User(usuario.getEmail(),usuario.getClave(),mapperRoles(perfil.getNombre()));
     }
     private Collection<? extends GrantedAuthority> mapperRoles(String perfil){

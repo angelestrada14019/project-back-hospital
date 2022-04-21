@@ -19,11 +19,12 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
 
     protected BaseRepository<E,ID> baseRepository;
 
-    @Autowired
+
     private V validator;
 
-    public BaseServiceImpl(BaseRepository<E,ID> baseRepository){
+    public BaseServiceImpl(BaseRepository<E,ID> baseRepository, V validator){
         this.baseRepository=baseRepository;
+        this.validator = validator;
     }
 
     @Transactional
@@ -57,7 +58,7 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
         try {
             //validator
             validator.validar(entity);
-            log.info("pase por save de service");
+            //log.info("pase por save de service");
             return  baseRepository.save(entity);
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){
@@ -75,9 +76,9 @@ public abstract class BaseServiceImpl<E extends Base,ID extends Serializable,V e
         try {
            
             validator.validar(entity);
-            log.info("despues de validator");
+            //log.info("despues de validator");
             Optional<E> entityS=baseRepository.findById((ID) entity.getId());
-            log.info("despues de entityS");
+            //log.info("despues de entityS");
             E entityU=entityS.orElseThrow(()-> new NoDataFoundExceptions("error al actualizar el id: " + entity.getId()));
             entityU=baseRepository.save(entity);
             return entityU;

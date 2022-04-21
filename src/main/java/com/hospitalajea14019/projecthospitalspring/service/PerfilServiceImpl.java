@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PerfilServiceImpl extends BaseServiceImpl<Perfil,Integer, PerfilValidator> {
-    public PerfilServiceImpl(BaseRepository<Perfil, Integer> baseRepository) {
-        super(baseRepository);
+    public PerfilServiceImpl(BaseRepository<Perfil, Integer> baseRepository, PerfilValidator perfilValidator) {
+        super(baseRepository, perfilValidator);
     }
 }

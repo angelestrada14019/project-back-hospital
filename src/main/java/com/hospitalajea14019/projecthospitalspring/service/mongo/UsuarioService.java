@@ -25,7 +25,7 @@ public class UsuarioService {
     @Transactional
     public List<Usuario> findAll(){
         try {
-            log.info("pase por findAll de service");
+            //log.info("pase por findAll de service");
             return usuarioRepository.findAll();
 
         }catch (ValidateServiceExceptions | NoDataFoundExceptions e){

@@ -19,7 +19,7 @@ public class DomicilioServiceImpl extends BaseServiceImpl<Domicilio,Integer, Dom
     @Autowired
     private DomicilioRepository domicilioRepository;
 
-    public DomicilioServiceImpl(BaseRepository<Domicilio, Integer> baseRepository) {
-        super(baseRepository);
+    public DomicilioServiceImpl(BaseRepository<Domicilio, Integer> baseRepository , DomicilioValidator domicilioValidator) {
+        super(baseRepository, domicilioValidator);
     }
 }

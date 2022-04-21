@@ -20,8 +20,8 @@ public class OdontologoServiceImpl extends BaseServiceImpl<Odontologo,Integer, O
     @Autowired
     private OdontologoRepository odontologoRepository;
 
-    public OdontologoServiceImpl(BaseRepository<Odontologo,Integer> baseRepository) {
-        super(baseRepository);
+    public OdontologoServiceImpl(BaseRepository<Odontologo,Integer> baseRepository, OdontologoValidator odontologoValidator) {
+        super(baseRepository, odontologoValidator);
     }
 
 

@@ -6,6 +6,7 @@ import com.hospitalajea14019.projecthospitalspring.model.Odontologo;
 import com.hospitalajea14019.projecthospitalspring.model.Paciente;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

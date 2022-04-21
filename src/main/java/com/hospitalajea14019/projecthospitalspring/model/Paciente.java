@@ -42,4 +42,8 @@ public class Paciente extends Base {
     @JsonIgnore
     //@JsonBackReference
     private Set<Turno> turnos=new HashSet<>();
+
+    public Paciente(Integer id) {
+        super(id);
+    }
 }

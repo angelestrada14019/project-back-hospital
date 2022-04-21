@@ -16,7 +16,7 @@ public class PacienteServiceImpl extends BaseServiceImpl<Paciente,Integer, Pacie
     @Autowired
     PacienteRepository pacienteRepository;
 
-    public PacienteServiceImpl(BaseRepository<Paciente, Integer> baseRepository) {
-        super(baseRepository);
+    public PacienteServiceImpl(BaseRepository<Paciente, Integer> baseRepository, PacienteValidator pacienteValidator) {
+        super(baseRepository, pacienteValidator);
     }
 }

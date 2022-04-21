@@ -35,8 +35,6 @@ public abstract class BaseControllerImpl<E extends Base,
     public ResponseEntity<WrapperResponse<List<D>>> findAll() {
         List<E> entitys = servicio.findAll();
         List<D> dtos = converter.fromEntity(entitys);
-        log.info("oase por base controller findall");
-        log.info(String.valueOf(dtos));
         return new WrapperResponse<>(true, "Succes", dtos).createResponse(HttpStatus.OK);
     }
 
@@ -52,7 +50,6 @@ public abstract class BaseControllerImpl<E extends Base,
     @Override
     public ResponseEntity<WrapperResponse<D>> save(@RequestBody D dto) {//@Valid
         E entity = servicio.save(converter.fromDto(dto));
-        log.info("pase por save de controller");
         D dtoS = converter.fromEntity(entity);
 
         return new WrapperResponse<>(true, "Create Succes", dtoS).createResponse(HttpStatus.CREATED);

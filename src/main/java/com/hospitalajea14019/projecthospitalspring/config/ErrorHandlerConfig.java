@@ -25,6 +25,7 @@ import java.util.Map;
 public class ErrorHandlerConfig extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> all(Exception e, WebRequest request){
+        log.error(e.getMessage(),e);
         WrapperResponse<?> response= new WrapperResponse<>(false,"Internal_Server_Error",null);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -55,6 +56,7 @@ public class ErrorHandlerConfig extends ResponseEntityExceptionHandler {
             String nombreCampo=((FieldError)objectError).getField(); //nombre del campo del error donde ocurre
             String mensaje=objectError.getDefaultMessage();
             errores.put(nombreCampo,mensaje);
+            log.error(errores.toString());
         }));
         WrapperResponse<?> response= new WrapperResponse<>(false,errores.toString(),null);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

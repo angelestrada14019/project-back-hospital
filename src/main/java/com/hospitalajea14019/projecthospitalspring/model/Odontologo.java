@@ -30,5 +30,7 @@ public class Odontologo extends Base {
     //@JsonBackReference
     private Set<Turno> turnos=new HashSet<>();
 
-
+    public Odontologo(Integer id) {
+        super(id);
+    }
 }
