@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  api_service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: app
+    environment:
+      MONGO_HOST: mongo_db
+      MONGO_PORT: 27017
+      MONGO_DB: hospital_api
+#      MONGO_USER: admin
+#      MONGO_PASS: adminpass
+
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo_db
+  mongo_db:
+    image: "mongo:4.4.3"
+    container_name: "mongodb"
+    environment:
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: adminpass
+      MONGO_INITDB_DATABASE: hospital-api
+    volumes:
+      - ./data/init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    restart: always
+    ports:
+      - 27017:27017
